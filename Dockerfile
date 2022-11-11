@@ -1,5 +1,9 @@
-FROM openjdk:17
-WORKDIR /pro
+FROM node:16.15-alpine3.14
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+RUN npm install
+COPY . .
 EXPOSE 8080
-COPY target/*.jar /pro/app.jar
-CMD ["java", "-jar", "app.jar"]
+
+CMD ["node", "app.js"]
