@@ -4,7 +4,7 @@ from github import Github
 from pprint import pprint
 import json
 # INITIALIZE GITHUB API LIBRARY TEMP ACCESS TOKEN EXPIRES 22/11/22
-g = Github("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")
+g = Github()
 repo = g.get_repo("MaxCunningham19/SWENG-SWE-Metric-Calculator")
 # TEST CHECK FOR NUMBER OF STARS SHOULD RETURN 1
 print(repo.stargazers_count)
