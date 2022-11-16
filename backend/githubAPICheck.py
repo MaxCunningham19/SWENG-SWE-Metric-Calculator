@@ -22,10 +22,13 @@ mmerges = 0
 fcommits = 0
 fmerges = 0
 
+bcommits = 0
+bmerges = 0
+
 # GET COMMIT DATA
 commits = repo.get_commits()
 numberOfCommits = commits.totalCount
-#for commit in commits:
+# for commit in commits:
 #    if commit.commit is not None:
 #        print(commit.commit.author)
 
@@ -38,36 +41,42 @@ for commit in commits:
                 fcommits += 1
             case "declanquinn00":
                 dcommits += 1
+            case "bairdr":
+                bcommits += 1
             case default:
                 print("Error unassigned commit")
 
-#print("Mcommits " + str(mcommits) + " Fcommits " + str(fcommits))
+# print("Mcommits " + str(mcommits) + " Fcommits " + str(fcommits))
 
 # GET BRANCH DATA
 branches = repo.get_branches()
 numberOfBranches = branches.totalCount
 
 # GET MERGE DATA
-#pulls = repo.get_pulls()
-#numberOfPulls = pulls.totalCount
-#for pull in pulls:
+# pulls = repo.get_pulls()
+# numberOfPulls = pulls.totalCount
+# for pull in pulls:
 #    print("test")
 
 # Data to be written
 dictionary = {
-    "total commits": numberOfCommits,
-    "total branches": numberOfBranches,
-    "declan username": "declanquinn00",
-    "declan commits": dcommits,
-    "declan merges": dmerges,
+    "total_commits": numberOfCommits,
+    "total_branches": numberOfBranches,
+    "declan_username": "declanquinn00",
+    "declan_commits": dcommits,
+    "declan_merges": dmerges,
 
-    "max username": "Max Cunningham",
-    "max commits": mcommits,
-    "max merges": mmerges,
+    "max_username": "Max Cunningham",
+    "max_commits": mcommits,
+    "max_merges": mmerges,
 
-    "ryan username": "francsir",
-    "ryan commits": fcommits,
-    "ryan merges": fmerges,
+    "ryan_username": "francsir",
+    "ryan_commits": fcommits,
+    "ryan_merges": fmerges,
+
+    "baird_username": "bairdr",
+    "baird_commits": bcommits,
+    "baird_merges": bmerges,
 }
 
 # Serializing json
