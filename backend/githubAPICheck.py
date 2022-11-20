@@ -44,6 +44,16 @@ aLinesOfCodeAdded = 0
 aLinesOfCodeDeleted = 0
 aMerges = 0
 
+gCommits = 0
+gLinesOfCodeAdded = 0
+gLinesOfCodeDeleted = 0
+gMerges = 0
+
+cCommits = 0
+cLinesOfCodeAdded = 0
+cLinesOfCodeDeleted = 0
+cMerges = 0
+
 # GET COMMIT DATA
 bList = list(repo.get_branches())
 numberOfBranches = len(bList)
@@ -90,6 +100,14 @@ for branch in bList:
                         aCommits += 1
                         aLinesOfCodeAdded += stats["additions"]
                         aLinesOfCodeDeleted += stats["deletions"]
+                    case "aislinggallagher":
+                        gCommits += 1
+                        gLinesOfCodeAdded += stats["additions"]
+                        gLinesOfCodeDeleted += stats["deletions"]
+                    case "okaforc":
+                        cCommits += 1
+                        cLinesOfCodeAdded += stats["additions"]
+                        cLinesOfCodeDeleted += stats["deletions"]
                     case default:
                         print("Error unassigned commit")
 
@@ -134,6 +152,18 @@ dictionary = {
     "ameen_lines_deleted": aLinesOfCodeDeleted,
     "ameen_commits": aCommits,
     "ameen_merges": aMerges,
+
+    "aisling_username": "aislinggallagher",
+    "aisling_lines_added": gLinesOfCodeAdded,
+    "aisling_lines_deleted": gLinesOfCodeDeleted,
+    "aisling_commits": gCommits,
+    "aisling_merges": gMerges,
+
+    "c_username": "okaforc",
+    "c_lines_added": cLinesOfCodeAdded,
+    "c_lines_deleted": cLinesOfCodeDeleted,
+    "c_commits": cCommits,
+    "c_merges": cMerges,
 }
 
 # Serializing json
