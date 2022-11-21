@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react'
+import Graph from './components/totalCommitsGraph'
+import Box from '@mui/material/Box';
 
 function App() {
 
-  const [backendData, setBackendData] = useState([{}])
+  {/*const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
     fetch("/api").then(
@@ -12,11 +14,10 @@ function App() {
         setBackendData(data)
       }
     )
-  }, [])
+  }, []) */}
   return (
-    <div>
-    
-      {(typeof backendData.users === 'undefined') ?  (
+    <Box>
+      {/* {(typeof backendData.users === 'undefined') ?  (
         <p>Loading...</p>
       ):
 
@@ -25,9 +26,8 @@ function App() {
           <p key={i}>{user}</p>
         ))
       )}
-
-
-    </div>
+        */}
+<Graph /> </Box>
   )
 }
 
