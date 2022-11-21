@@ -1,13 +1,15 @@
 {
-    "total commits": 9,
-    "total branches": 2,
-    "declan username": "declanquinn00",
-    "declan commits": 0,
-    "declan merges": 0,
-    "max username": "Max Cunningham",
-    "max commits": 5,
-    "max merges": 0,
-    "ryan username": "francsir",
-    "ryan commits": 4,
-    "ryan merges": 0
+    "stars": 2,
+    "total_commits_to_main": 0,
+    "total_branches": 4,
+    "francsir_total_additions": 65,
+    "francsir_total_deletions": 4,
+    "francsir_total_commits": 4,
+    "francsir_average_commitsPerWeek": 1.0,
+    "francsir_quality_lines_of_code": 65,
+    "MaxCunningham19_total_additions": 62465,
+    "MaxCunningham19_total_deletions": 0,
+    "MaxCunningham19_total_commits": 4,
+    "MaxCunningham19_average_commitsPerWeek": 1.0,
+    "MaxCunningham19_quality_lines_of_code": 80
 }
