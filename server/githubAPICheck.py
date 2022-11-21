@@ -40,8 +40,15 @@ def get_repo_data(repo_name):
     }
 
     rstats = repo.get_stats_contributors()
+    contributors = list()
+    contributorData = list()
     for contributor in rstats:
         author = contributor.author.login
+        contributors.append(author)
+        dict = {
+            "user": author
+        }
+
         # dictionary[author] = contributor.weeks
         totalAdditions = 0
         totalDeletions = 0
@@ -52,57 +59,62 @@ def get_repo_data(repo_name):
             totalCommits += week.c
         # COMPILE DATA
         averageCommitsPerWeek = totalCommits / len(contributor.weeks)
-        dictionary[author + "_total_additions"] = totalAdditions
-        dictionary[author + "_total_deletions"] = totalDeletions
-        dictionary[author + "_total_commits"] = totalCommits
-        dictionary[author + "_average_commitsPerWeek"] = averageCommitsPerWeek
-        dictionary[author + "_very_many_lines_of_code"] = 0
-        dictionary[author + "_very_many_lines_of_code_commits"] = 0
-        dictionary[author + "_many_lines_of_code"] = 0
-        dictionary[author + "_many_lines_of_code"] = 0
-        dictionary[author + "_average_lines_of_code"] = 0
-        dictionary[author + "_average_lines_of_code_commits"] = 0
-        dictionary[author + "_few_lines_of_code"] = 0
-        dictionary[author + "_few_lines_of_code_commits"] = 0
+        dictionary["contributors"] = contributors
+        dict["total_additions"] = totalAdditions
+        dict["total_deletions"] = totalDeletions
+        dict["total_commits"] = totalCommits
+        dict["average_commitsPerWeek"] = averageCommitsPerWeek
+        dict["very_many_lines_of_code"] = 0
+        dict["very_many_lines_of_code_commits"] = 0
+        dict["many_lines_of_code"] = 0
+        dict["many_lines_of_code_commits"] = 0
+        dict["average_lines_of_code"] = 0
+        dict["average_lines_of_code_commits"] = 0
+        dict["few_lines_of_code"] = 0
+        dict["few_lines_of_code_commits"] = 0
+        contributorData.append(dict)
+
+    dictionary["contributor_data"] = contributorData
+
 
     # QUALITY COMMITS CHECK
     # get quality lines of code then add additional commited quality lines
     for commit in commits:
         linesCommitted = commit.stats.additions
         author = commit.author.login
+        userdict = None
+        for dict in dictionary.get("contributor_data"):
+            if(dict.get("user") == author):
+                if (linesCommitted <= MAX_SMALL_COMMIT_LENGTH):
+                    linesOfCode = dict.get("few_lines_of_code")
+                    linesOfCodeCommits = dict.get("few_lines_of_code_commits")
+                    linesOfCode += linesCommitted
+                    linesOfCodeCommits += 1
+                    dict["few_lines_of_code"] = linesOfCode
+                    dict["few_lines_of_code_commits"] = linesOfCodeCommits
 
-        if (linesCommitted <= MAX_SMALL_COMMIT_LENGTH):
-            linesOfCode = dictionary.get(author + "_few_lines_of_code")
-            linesOfCodeCommits = dictionary.get(author + "_few_lines_of_code_commits")
-            linesOfCode += linesCommitted
-            linesOfCodeCommits += 1
-            dictionary[author + "_few_lines_of_code"] = linesOfCode
-            dictionary[author + "_few_lines_of_code_commits"] = linesOfCodeCommits
+                elif (linesCommitted <= MAX_MEDIUM_COMMIT_LENGTH):
+                    linesOfCode = dict.get("average_lines_of_code")
+                    linesOfCodeCommits = dict.get("average_lines_of_code_commits")
+                    linesOfCode += linesCommitted
+                    linesOfCodeCommits += 1
+                    dict["average_lines_of_code"] = linesOfCode
+                    dict["average_lines_of_code_commits"] = linesOfCodeCommits
 
-        elif (linesCommitted <= MAX_MEDIUM_COMMIT_LENGTH):
-            linesOfCode = dictionary.get(author + "_average_lines_of_code")
-            linesOfCodeCommits = dictionary.get(author + "_average_lines_of_code_commits")
-            linesOfCode += linesCommitted
-            linesOfCodeCommits += 1
-            dictionary[author + "_average_lines_of_code"] = linesOfCode
-            dictionary[author + "_average_lines_of_code_commits"] = linesOfCodeCommits
-
-        elif (linesCommitted <= MAX_LARGE_COMMIT_LENGTH):
-            linesOfCode = dictionary.get(author + "_many_lines_of_code")
-            linesOfCodeCommits = dictionary.get(author + "_many_lines_of_code_commits")
-            linesOfCode += linesCommitted
-            linesOfCodeCommits += 1
-            dictionary[author + "_many_lines_of_code"] = linesOfCode
-            dictionary[author + "_many_lines_of_code_commits"] = linesOfCodeCommits
-        elif (linesCommitted > MAX_LARGE_COMMIT_LENGTH):
-            linesOfCode = dictionary.get(author + "_very_many_lines_of_code")
-            linesOfCodeCommits = dictionary.get(author + "_very_many_lines_of_code_commits")
-            linesOfCode += linesCommitted
-            linesOfCodeCommits += 1
-            dictionary[author + "_very_many_lines_of_code"] = linesOfCode
-            dictionary[author + "_very_many_lines_of_code_commits"] = linesOfCodeCommits
-
-    # print("Mcommits " + str(mcommits) + " Fcommits " + str(fcommits))
+                elif (linesCommitted <= MAX_LARGE_COMMIT_LENGTH):
+                    linesOfCode = dict.get("many_lines_of_code")
+                    linesOfCodeCommits = dict.get("many_lines_of_code_commits")
+                    linesOfCode += linesCommitted
+                    linesOfCodeCommits += 1
+                    dict["many_lines_of_code"] = linesOfCode
+                    dict["many_lines_of_code_commits"] = linesOfCodeCommits
+                elif (linesCommitted > MAX_LARGE_COMMIT_LENGTH):
+                    linesOfCode = dict.get("very_many_lines_of_code")
+                    linesOfCodeCommits = dict.get("very_many_lines_of_code_commits")
+                    linesOfCode += linesCommitted
+                    linesOfCodeCommits += 1
+                    dict["very_many_lines_of_code"] = linesOfCode
+                    dict["very_many_lines_of_code_commits"] = linesOfCodeCommits
 
     # Serializing json
     json_object = json.dumps(dictionary, indent=4)
