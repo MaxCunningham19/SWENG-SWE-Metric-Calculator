@@ -1,0 +1,41 @@
+{
+    "stars": 2,
+    "total_commits_to_main": 0,
+    "total_branches": 4,
+    "contributors": [
+        "francsir",
+        "MaxCunningham19"
+    ],
+    "contributor_data": [
+        {
+            "user": "francsir",
+            "total_additions": 65,
+            "total_deletions": 4,
+            "total_commits": 4,
+            "average_commitsPerWeek": 1.0,
+            "very_many_lines_of_code": 0,
+            "very_many_lines_of_code_commits": 0,
+            "many_lines_of_code": 0,
+            "many_lines_of_code_commits": 0,
+            "average_lines_of_code": 49,
+            "average_lines_of_code_commits": 1,
+            "few_lines_of_code": 16,
+            "few_lines_of_code_commits": 3
+        },
+        {
+            "user": "MaxCunningham19",
+            "total_additions": 62465,
+            "total_deletions": 0,
+            "total_commits": 4,
+            "average_commitsPerWeek": 1.0,
+            "very_many_lines_of_code": 62416,
+            "very_many_lines_of_code_commits": 1,
+            "many_lines_of_code": 0,
+            "many_lines_of_code_commits": 0,
+            "average_lines_of_code": 62,
+            "average_lines_of_code_commits": 2,
+            "few_lines_of_code": 18,
+            "few_lines_of_code_commits": 2
+        }
+    ]
+}
