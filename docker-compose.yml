@@ -4,17 +4,18 @@ services:
 
   server:
     build:
-      dockerfile: Dockerfile
-      context: "./server"
+      context: ./server
+      dockerfile: ./Dockerfile
+    container_name: server
     ports:
       - 5000:5000
-    links:
-      - client
+
     
   client:
     build:
-      dockerfile: Dockerfile
       context: ./client
-
+      dockerfile: ./Dockerfile
     ports:
       - 3000:3000
+    links:
+      - server
