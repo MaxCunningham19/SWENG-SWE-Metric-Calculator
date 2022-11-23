@@ -5,6 +5,11 @@ from pprint import pprint
 import json
 import datetime
 import math
+
+
+MAXIMUM_LINES_FOR_SMALL_COMMITS=20
+MAXIMUM_LINES_FOR_MEDIUM_COMMITS=200
+MAXIMUM_LINES_FOR_LARGE_COMMITS=500
 # INITIALIZE GITHUB API LIBRARY TEMP ACCESS TOKEN EXPIRES 22/11/22
 g = Github()
 # repo = g.get_repo("MaxCunningham19/SWENG-SWE-Metric-Calculator")
@@ -66,6 +71,16 @@ def getOverallData(repo,contributorList):
                 individualCommits+=1
                 linesAdded+=stats["additions"]
                 linesDeleted+=stats["deletions"]
+                if lastCommitDate < commit.commit.author.date:
+                    lastCommitDate=commit.commit.author.date
+                if stats["total"] <= MAXIMUM_LINES_FOR_SMALL_COMMITS:
+                    smallCommits+=1
+                elif stats["total"] <= MAXIMUM_LINES_FOR_MEDIUM_COMMITS:
+                    mediumCommits+=1
+                elif stats["total"] <= MAXIMUM_LINES_FOR_LARGE_COMMITS:
+                    largeCommits+=1
+                elif stats["total"] > MAXIMUM_LINES_FOR_LARGE_COMMITS:
+                    veryLargeCommits+=1
                 # Checks if the current commit is the last one made
                 if lastCommitDate < commit.commit.author.date:
                     lastCommitDate=commit.commit.author.date
@@ -76,18 +91,18 @@ def getOverallData(repo,contributorList):
         individual={
             "user":contributor[1],
             "total_commits":individualCommits,
-            "total_additions":linesAdded,
-            "total_deletions":linesDeleted,
             "last_commit_date":lastCommitDate.strftime("%d/%m/%Y"),
             "average_commits_per_week":round(averageCommitsPerWeek,2),
+            "total_additions":linesAdded,
+            "total_deletions":linesDeleted,
             "small_commits":smallCommits,
-            "small_commits_line_of_code":smallCommits,
+            "small_commits_line_of_code":"<="+str(MAXIMUM_LINES_FOR_SMALL_COMMITS),
             "medium_commits":mediumCommits,
-            "medium_commits_line_of_code":mediumCommits,
+            "medium_commits_line_of_code":"<="+str(MAXIMUM_LINES_FOR_MEDIUM_COMMITS),
             "large_commits":largeCommits,
-            "large_commits_line_of_code":largeCommits,
+            "large_commits_line_of_code":"<="+str(MAXIMUM_LINES_FOR_LARGE_COMMITS),
             "very_large_commits":veryLargeCommits,
-            "very_large_commits_line_of_code":veryLargeCommits
+            "very_large_commits_line_of_code":">"+str(MAXIMUM_LINES_FOR_LARGE_COMMITS)
         }
         # Adds each users data
         dictionary["contributor_data"].append(individual)
