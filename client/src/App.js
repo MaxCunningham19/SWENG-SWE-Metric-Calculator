@@ -1,5 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import Graph from './components/totalCommitsGraph'
+import LinesGraph from './components/linesAddedGraph'
+import DeletedGraph from './components/linesDeletedGraph'
+import MergesGraph from './components/mergesGraph'
 import Box from '@mui/material/Box';
 
 function App() {
@@ -27,7 +30,11 @@ function App() {
         ))
       )}
         */}
-<Graph /> </Box>
+<Graph /> 
+<LinesGraph />
+<DeletedGraph />
+<MergesGraph />
+</Box>
   )
 }
 
