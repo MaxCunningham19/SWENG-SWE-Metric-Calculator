@@ -1,8 +1,13 @@
 import React, {useEffect, useState} from 'react'
+import Graph from './components/totalCommitsGraph'
+import LinesGraph from './components/linesAddedGraph'
+import DeletedGraph from './components/linesDeletedGraph'
+import MergesGraph from './components/mergesGraph'
+import Box from '@mui/material/Box';
 
 function App() {
 
-  const [backendData, setBackendData] = useState([{}])
+  {/*const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
     fetch("/api").then(
@@ -12,11 +17,10 @@ function App() {
         setBackendData(data)
       }
     )
-  }, [])
+  }, []) */}
   return (
-    <div>
-    
-      {(typeof backendData.users === 'undefined') ?  (
+    <Box>
+      {/* {(typeof backendData.users === 'undefined') ?  (
         <p>Loading...</p>
       ):
 
@@ -25,9 +29,12 @@ function App() {
           <p key={i}>{user}</p>
         ))
       )}
-
-
-    </div>
+        */}
+<Graph /> 
+<LinesGraph />
+<DeletedGraph />
+<MergesGraph />
+</Box>
   )
 }
 
