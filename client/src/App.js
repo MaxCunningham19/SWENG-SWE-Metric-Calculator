@@ -3,7 +3,8 @@ import Graph from './components/totalCommitsGraph'
 import LinesGraph from './components/linesAddedGraph'
 import DeletedGraph from './components/linesDeletedGraph'
 import MergesGraph from './components/mergesGraph'
-import Box from '@mui/material/Box';
+import Box from '@mui/material/Box'
+import Navbar from './components/Navbar';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
   }, []) */}
   return (
     <Box>
+      <Navbar/>
       {/* {(typeof backendData.users === 'undefined') ?  (
         <p>Loading...</p>
       ):
