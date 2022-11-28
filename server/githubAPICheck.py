@@ -112,18 +112,18 @@ def get_repo_data(repo_name, access_token):
         # Serializing json
         json_object = json.dumps(dictionary, indent=4)
 
-        # Writing to sample.json
-        with open("githubData.json", "w") as outfile:
-            outfile.write(json_object)
+        # DEBUG WRITE TO JSON FILE
+        # with open("githubData.json", "w") as outfile:
+        #    outfile.write(json_object)
         print("Data Written to JSON")
-        return True
+        return json_object
 
     except Exception as e:
         print(e)
         print("\nError Writing to JSON")
-        return False
+        return None
 
 
 
 repo_name = "MaxCunningham19/SWENG-SWE-Metric-Calculator"
-get_repo_data(repo_name, "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")
+get_repo_data(repo_name, "my_personal_access_token") # ! MUST BE VALID PERSONAL ACCESS TOKEN
