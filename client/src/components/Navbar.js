@@ -1,86 +1,121 @@
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
+import { styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import data from '../api/newData';
 
 const pages = ['Home', 'Metrics'];
 
 function Navbar() {
-
-  const handleChangePage = (event) => {
-  };
-
-  const Search = styled('div')(({ theme }) => ({
+  
+  const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.common.white, 0.15),
+    width: '25ch',
+    backgroundColor: '#8368a9',
+    '&:hover fieldset': {
+      border: 'none',
+    },
     '&:hover': {
-      backgroundColor: alpha(theme.palette.common.white, 0.25),
+      backgroundColor: '#8368a9',
     },
-    marginLeft: 0,
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(1),
-      width: 'auto',
-    },
-  }));
+    '&.Mui-focused .MuiOutlinedInput-root': {
+        backgroundColor: '#8368a9',
+       },
+       '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+        border: 1,
+        borderColor: '#000000',
+       },
+    // '& .MuiInputBase-input': {
+    //   transition: theme.transitions.create('width'),
+    //   width: '50ch',
+    //   [theme.breakpoints.up('sm')]: {
+    //     '&:focus': {
+    //       width: '25ch',
+    //     },
+    //   },
+    // },
+              //  width: 250,
+              // '& .MuiInputBase-input': {
+              //   transition: theme.transitions.create('width'),
+              //   width: '100%',
+              //   [theme.breakpoints.up('sm')]: {
+              //     width: '12ch',
+              //     '&:focus': {
+              //       width: '20ch',
+              //     }
+              //   }
+              // },
+              // '&.Mui-focused .MuiOutlinedInput-root': {
+              //   backgroundColor: '#8368a9',
+              //  },
+              //  '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              //   border: 1,
+              //   borderColor: '#000000',
+              //  },
+              }));
 
-  const SearchIconWrapper = styled('div')(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }));
-
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: 'inherit',
-    '& .MuiInputBase-input': {
-      padding: theme.spacing(1, 1, 1, 0),
-      // vertical padding + font size from searchIcon
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create('width'),
-      width: '100%',
-      [theme.breakpoints.up('sm')]: {
-        width: '12ch',
-        '&:focus': {
-          width: '20ch',
-        },
-      },
-    },
-  }));
 
   return (
-    <AppBar style={{ background: '#6e5494'}} position="absolute">
+    <AppBar style={{ background: '#6e5494', border: 1}} position="absolute">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }}}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleChangePage}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+          <StyledAutocomplete
+            // sx={{ width: 250,
+            //   '& .MuiInputBase-input': {
+            //     transition: theme.transitions.create('width'),
+            //     width: '100%',
+            //     [theme.breakpoints.up('sm')]: {
+            //       width: '12ch',
+            //       '&:focus': {
+            //         width: '20ch',
+            //       }
+            //     }
+            //   },
+            //   '&.Mui-focused .MuiOutlinedInput-root': {
+            //     backgroundColor: '#8368a9',
+            //    },
+            //    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+            //     border: 1,
+            //     borderColor: '#000000',
+            //    },
+            // }}
+            options={data}
+            autoHighlight
+            getOptionLabel={(option) => option.username}
+            renderOption={(props, option) => (
+            <Box component="li" sx={{ mr: 2, flexShrink: 0, bgcolor: '#e8dff5' }} {...props}>
+             {option.username}
+            </Box>
+            )}
+            renderInput={(params) => (
+            <TextField
+             {...params}
+             size="small"
+             placeholder="Search User..."
+             inputProps={{
+             ...params.inputProps,
+             autoComplete: 'new-password', // disable autocomplete and autofill
+             }}
             />
-          </Search>
+            )}
+            />
         </Toolbar>
       </Container>
     </AppBar>
