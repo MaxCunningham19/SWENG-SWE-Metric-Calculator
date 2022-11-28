@@ -23,7 +23,6 @@ def get_repo_data(repo_name, access_token):
 
         bList = list(repo.get_branches())
         numberOfBranches = len(bList)
-        numberOfCommits = 0
 
         # USER DATA
         # Data to be written
@@ -127,4 +126,4 @@ def get_repo_data(repo_name, access_token):
 
 
 repo_name = "MaxCunningham19/SWENG-SWE-Metric-Calculator"
-get_repo_data(repo_name, "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")
+get_repo_data(repo_name, "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")
