@@ -95,7 +95,7 @@ function App() {
     }, [theme]);
   return (
     <Box>
-      <Navbar/>
+      <Navbar data={data} toggleTheme={toggleTheme}/>
       {/* {(typeof backendData.users === 'undefined') ?  (
         <p>Loading...</p>
       ):
@@ -107,7 +107,6 @@ function App() {
       )}
         */}
     <Box mt={10}>
-    <Button variant="contained" onClick={toggleTheme}>Toggle Theme</Button>
     </Box>
     <Grid
   container

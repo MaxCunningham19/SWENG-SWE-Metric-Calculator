@@ -8,12 +8,12 @@ import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-import data from '../api/newData';
-
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
 const pages = ['Home', 'Metrics'];
 
-function Navbar() {
-  
+function Navbar({data, toggleTheme}) {
+  console.log(toggleTheme)
   const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -116,6 +116,10 @@ function Navbar() {
             />
             )}
             />
+          <Box ml={10}>
+            <Typography>Dark Mode</Typography>
+            <Switch label={`Dark Mode`} onChange={toggleTheme} />
+          </Box>    
         </Toolbar>
       </Container>
     </AppBar>

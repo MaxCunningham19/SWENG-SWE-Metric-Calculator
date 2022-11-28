@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
  
 function LinesAddedGraph({data}) {
-    console.log(data)
     //const [graphData, setGraphData] = useState();
     //const [loading, setLoading] = useState(true);
     //setGraphData(data);
