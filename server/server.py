@@ -1,32 +1,35 @@
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import githubAPICheck as githubAPI
 import formatToReact as formatter
-import cgi
-import json
+# import cgi
+# import json
 
 PORT = 8000
 
 class MyServer(BaseHTTPRequestHandler):
     def do_GET(self):
-        ctype, pdict = cgi.parse_header(self.headers.getheader('content-type'))
+        # print(self.headers)
+        # ctype, _ = cgi.parse_header(self.headers.get('content-type'))
+        # print(self.path)
         # refuse to receive non-json content
-        if ctype != 'application/json':
-            self.send_response(400)
-            self.end_headers()
-            return
+        # if ctype != 'application/json':
+            # return
 
+        # self.send_response(200)
+        # self.send_header("Content-type", "application/json")
+        # self.end_headers()
         # read the message and convert it into a python dictionary
-        length = int(self.headers.getheader('content-length'))
-        message = json.loads(self.rfile.read(length))
+        # length = int(self.headers.get('content-length'))
+        # message = json.loads(self.rfile.read(length))
 
-        repo_name = message['repo']
-        api_key = message['apikey']
+        repo_name = 'MaxCunningham19/SWENG-SWE-Metric-Calculator'
+        api_key = '' # ! MUST BE VALID PERSONAL ACCESS TOKEN, WILL NOT WORK OTHERWISE
+        output_string = formatter.format_data(githubAPI.get_repo_data(repo_name,api_key))
 
         self.send_response(200)
-        self.parse_request()
         self.send_header("Content-type", "application/json")
         self.end_headers()
-        self.wfile.write(bytes(formatter.format(githubAPI.get_repo_data(repo_name,api_key))))
+        self.wfile.write(str.encode(output_string))
 
 
 if __name__ == "__main__":

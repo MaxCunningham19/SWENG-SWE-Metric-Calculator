@@ -127,4 +127,4 @@ def get_repo_data(repo_name, access_token):
 
 
 repo_name = "MaxCunningham19/SWENG-SWE-Metric-Calculator"
-get_repo_data(repo_name, "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")
+get_repo_data(repo_name, "my_personal_access_token") # ! MUST BE VALID PERSONAL ACCESS TOKEN
