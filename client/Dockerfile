@@ -3,7 +3,7 @@ WORKDIR /client
 COPY package.json ./
 COPY package-lock.json ./
 COPY . .
-Run npm i
+RUN npm i
 
 EXPOSE 3000
 CMD ["npm", "run", "start"]
