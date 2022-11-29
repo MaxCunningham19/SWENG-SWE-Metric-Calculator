@@ -1,11 +1,13 @@
 {
     "stars": 3,
-    "total_commits_to_main": 0,
+    "total_commits_to_main": 36,
     "total_branches": 7,
     "contributors": [
         "okaforc",
         "bairdr",
+        "VictoriaFabijaniak",
         "MaxCunningham19",
+        "aislinggallagher",
         "francsir",
         "declanquinn00"
     ],
@@ -41,6 +43,21 @@
             "few_lines_of_code_commits": 0
         },
         {
+            "user": "VictoriaFabijaniak",
+            "total_additions": 198,
+            "total_deletions": 72,
+            "total_commits": 3,
+            "average_commitsPerWeek": 0.6,
+            "very_many_lines_of_code": 2535,
+            "very_many_lines_of_code_commits": 1,
+            "many_lines_of_code": 0,
+            "many_lines_of_code_commits": 0,
+            "average_lines_of_code": 182,
+            "average_lines_of_code_commits": 2,
+            "few_lines_of_code": 16,
+            "few_lines_of_code_commits": 1
+        },
+        {
             "user": "MaxCunningham19",
             "total_additions": 62465,
             "total_deletions": 0,
@@ -53,6 +70,21 @@
             "average_lines_of_code": 62,
             "average_lines_of_code_commits": 2,
             "few_lines_of_code": 18,
+            "few_lines_of_code_commits": 2
+        },
+        {
+            "user": "aislinggallagher",
+            "total_additions": 30870,
+            "total_deletions": 19337,
+            "total_commits": 5,
+            "average_commitsPerWeek": 1.0,
+            "very_many_lines_of_code": 60951,
+            "very_many_lines_of_code_commits": 4,
+            "many_lines_of_code": 0,
+            "many_lines_of_code_commits": 0,
+            "average_lines_of_code": 0,
+            "average_lines_of_code_commits": 0,
+            "few_lines_of_code": 9,
             "few_lines_of_code_commits": 2
         },
         {

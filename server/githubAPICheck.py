@@ -4,7 +4,19 @@ import json
 
 
 # GETS REPO DATA REQUIRES NAME AND ACCESS TOKEN
-def get_repo_data(repo_name, access_token):
+def get_repo_data(repo_name:str, access_token:str) -> str | None:
+    """Given a repository name and a valid personal access token, return the data for the repository
+        as a JSON-formatted string.
+        - -
+        Parameters:
+            - `repo_name`: the name of the repository, formatted 'username/repo name' 
+            - `access_token`: a valid personal access token from any user
+        - -
+        Returns: 
+            - `str`: a JSON-formatted string containing information about the chosen repository if successful, or
+            - `None`: if an exception occurs at any point
+    """
+        
     MAX_SMALL_COMMIT_LENGTH = 20    # low score
     MAX_MEDIUM_COMMIT_LENGTH = 200  # high score
     MAX_LARGE_COMMIT_LENGTH = 500   # medium score
