@@ -1,7 +1,7 @@
 import requests
 from github import Github
 import json
-
+import math
 
 # GETS REPO DATA REQUIRES NAME AND ACCESS TOKEN
 def get_repo_data(repo_name, access_token):
@@ -13,7 +13,7 @@ def get_repo_data(repo_name, access_token):
         # INITIALIZE GITHUB API LIBRARY TEMP ACCESS TOKEN EXPIRES 22/11/22
         g = Github(access_token)
         repo = g.get_repo(repo_name)
-
+        createdAt= repo.created_at
         # TEST CHECK FOR NUMBER OF STARS
         numberOfStars = repo.stargazers_count
 
@@ -56,7 +56,7 @@ def get_repo_data(repo_name, access_token):
             dict["total_additions"] = totalAdditions
             dict["total_deletions"] = totalDeletions
             dict["total_commits"] = totalCommits
-            dict["average_commitsPerWeek"] = averageCommitsPerWeek
+            dict["average_commitsPerWeek"] = 0#averageCommitsPerWeek
             dict["very_many_lines_of_code"] = 0
             dict["very_many_lines_of_code_commits"] = 0
             dict["many_lines_of_code"] = 0
@@ -69,7 +69,7 @@ def get_repo_data(repo_name, access_token):
 
         dictionary["contributor_data"] = contributorData
 
-
+        lastCommitDate=createdAt
         # QUALITY COMMITS CHECK
         # get quality lines of code then add additional commited quality lines
         for commit in commits:
@@ -107,6 +107,17 @@ def get_repo_data(repo_name, access_token):
                         linesOfCodeCommits += 1
                         dict["very_many_lines_of_code"] = linesOfCode
                         dict["very_many_lines_of_code_commits"] = linesOfCodeCommits
+            # New Average Commits formula 
+            # YET TO BE IMPLEMENTED IN LOOP, ONLY CALCULATES FOR LAST USER 
+            if commit.commit.author.date>lastCommitDate:
+                lastCommitDate=commit.commit.author.date
+        weeks=math.floor((lastCommitDate-createdAt).days/7)
+        if weeks==0:
+            weeks=1
+        averageCommitsPerWeek=totalCommits/weeks
+        dict["average_commitsPerWeek"] = averageCommitsPerWeek
+        
+                
 
 
         # Serializing json
