@@ -65,9 +65,9 @@ def get_repo_data(repo_name:str, access_token:str) -> str | None:
             # COMPILE DATA
             averageCommitsPerWeek = totalCommits / len(contributor.weeks)
             dictionary["contributors"] = contributors
-            dict["total_additions"] = totalAdditions
-            dict["total_deletions"] = totalDeletions
-            dict["total_commits"] = totalCommits
+            dict["total_additions"] = 0  #totalAdditions
+            dict["total_deletions"] = 0  #totalDeletions
+            dict["total_commits"] = 0    #totalCommits
             dict["average_commitsPerWeek"] = 0#averageCommitsPerWeek
             dict["very_many_lines_of_code"] = 0
             dict["very_many_lines_of_code_commits"] = 0
@@ -82,43 +82,88 @@ def get_repo_data(repo_name:str, access_token:str) -> str | None:
         dictionary["contributor_data"] = contributorData
 
         lastCommitDate=createdAt
+
         # QUALITY COMMITS CHECK
         # get quality lines of code then add additional commited quality lines
         for commit in commits:
             linesCommitted = commit.stats.additions
+            additions = commit.stats.additions
+            deletions = commit.stats.deletions
             author = commit.author.login
             for dict in dictionary.get("contributor_data"):
                 if(dict.get("user") == author):
                     if (linesCommitted <= MAX_SMALL_COMMIT_LENGTH):
                         linesOfCode = dict.get("few_lines_of_code")
                         linesOfCodeCommits = dict.get("few_lines_of_code_commits")
+                        totalAdditions = dict.get("total_additions")
+                        totalDeletions = dict.get("total_deletions")
+                        totalCommits = dict.get("total_commits")
+                        totalAdditions += additions
+                        totalDeletions += deletions
+
+                        totalCommits += 1
                         linesOfCode += linesCommitted
                         linesOfCodeCommits += 1
+                        dict["total_additions"] = totalAdditions
+                        dict["total_deletions"] = totalDeletions
+                        dict["total_commits"] = totalCommits
                         dict["few_lines_of_code"] = linesOfCode
                         dict["few_lines_of_code_commits"] = linesOfCodeCommits
 
                     elif (linesCommitted <= MAX_MEDIUM_COMMIT_LENGTH):
                         linesOfCode = dict.get("average_lines_of_code")
                         linesOfCodeCommits = dict.get("average_lines_of_code_commits")
+                        totalAdditions = dict.get("total_additions")
+                        totalDeletions = dict.get("total_deletions")
+                        totalCommits = dict.get("total_commits")
+                        totalAdditions += additions
+                        totalDeletions += deletions
+
+                        totalCommits += 1
                         linesOfCode += linesCommitted
                         linesOfCodeCommits += 1
+                        dict["total_additions"] = totalAdditions
+                        dict["total_deletions"] = totalDeletions
+                        dict["total_commits"] = totalCommits
                         dict["average_lines_of_code"] = linesOfCode
                         dict["average_lines_of_code_commits"] = linesOfCodeCommits
 
                     elif (linesCommitted <= MAX_LARGE_COMMIT_LENGTH):
                         linesOfCode = dict.get("many_lines_of_code")
                         linesOfCodeCommits = dict.get("many_lines_of_code_commits")
+                        totalAdditions = dict.get("total_additions")
+                        totalDeletions = dict.get("total_deletions")
+                        totalCommits = dict.get("total_commits")
+                        totalAdditions += additions
+                        totalDeletions += deletions
+
+                        totalCommits += 1
                         linesOfCode += linesCommitted
                         linesOfCodeCommits += 1
+
+                        dict["total_additions"] = totalAdditions
+                        dict["total_deletions"] = totalDeletions
+                        dict["total_commits"] = totalCommits
                         dict["many_lines_of_code"] = linesOfCode
                         dict["many_lines_of_code_commits"] = linesOfCodeCommits
                     elif (linesCommitted > MAX_LARGE_COMMIT_LENGTH):
                         linesOfCode = dict.get("very_many_lines_of_code")
                         linesOfCodeCommits = dict.get("very_many_lines_of_code_commits")
+                        totalAdditions = dict.get("total_additions")
+                        totalDeletions = dict.get("total_deletions")
+                        totalCommits = dict.get("total_commits")
+                        totalAdditions += additions
+                        totalDeletions += deletions
+
+                        totalCommits += 1
                         linesOfCode += linesCommitted
                         linesOfCodeCommits += 1
+                        dict["total_additions"] = totalAdditions
+                        dict["total_deletions"] = totalDeletions
+                        dict["total_commits"] = totalCommits
                         dict["very_many_lines_of_code"] = linesOfCode
                         dict["very_many_lines_of_code_commits"] = linesOfCodeCommits
+
             # New Average Commits formula 
             # YET TO BE IMPLEMENTED IN LOOP, ONLY CALCULATES FOR LAST USER 
             if commit.commit.author.date>lastCommitDate:
@@ -136,8 +181,8 @@ def get_repo_data(repo_name:str, access_token:str) -> str | None:
         json_object = json.dumps(dictionary, indent=4)
 
         # DEBUG WRITE TO JSON FILE
-        # with open("githubData.json", "w") as outfile:
-        #    outfile.write(json_object)
+        #with open("githubData.json", "w") as outfile:
+        #   outfile.write(json_object)
         print("Data Written to JSON")
         return json_object
 
