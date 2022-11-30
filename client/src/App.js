@@ -82,7 +82,9 @@ function App() {
   {/*const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
-    fetch("/api").then(
+    fetch("/api", {
+      mode: 'cors',
+    }).then(
       response => response.json()
     ).then(
       data => {
