@@ -1,25 +1,25 @@
 import requests
 from github import Github
-from flask import Flask
-from flask_restful import Resource, Api, reqparse
+##from flask import Flask
+##from flask_restful import Resource, Api, reqparse
 import json
 import math
 
-app = Flask(__name__)
-api = Api(app)
+##app = Flask(__name__)
+##api = Api(app)
 
 # GETS REPO DATA REQUIRES NAME AND ACCESS TOKEN
 
 
-class Users(Resource):
-    def get(self):
-        repo_name = "MaxCunningham19/SWENG-SWE-Metric-Calculator"
-        token = "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"
-        data = get_repo_data(repo_name, token)
-        return data
+##class Users(Resource):
+##    def get(self):
+##        repo_name = "MaxCunningham19/SWENG-SWE-Metric-Calculator"
+##        token = "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"
+##        data = get_repo_data(repo_name, token)
+##        return data
 
 
-api.add_resource(Users, '/users')
+##api.add_resource(Users, '/users')
 
 
 def get_repo_data(repo_name: str, access_token: str) -> str | None:
@@ -211,5 +211,5 @@ def get_repo_data(repo_name: str, access_token: str) -> str | None:
         return None
 
 
-if __name__ == "__main__":
-    app.run(debug=True)
+##if __name__ == "__main__":
+  ##  app.run(debug=True)
