@@ -1,4 +1,5 @@
 {
+
     "stars": 3,
     "total_commits_to_main": 36,
     "total_branches": 7,
@@ -22,6 +23,7 @@
             "very_many_lines_of_code_commits": 0,
             "many_lines_of_code": 0,
             "many_lines_of_code_commits": 0,
+
             "average_lines_of_code": 29,
             "average_lines_of_code_commits": 1,
             "few_lines_of_code": 0,

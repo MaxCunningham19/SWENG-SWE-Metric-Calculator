@@ -1,6 +1,5 @@
 import json
 
-
 def format_name(file_name: str):
     """
     Parses the given JSON name and returns a JSON string in a format suitable for React.js.
