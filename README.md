@@ -11,4 +11,12 @@ The brief for the assignment is as follows:
 * Decide on team dynamics / roles. (frontend, backend, service based)
 * Come up with a system design.
 * Create design and commit workflows.
-* We HAVE to implement agile sprints.
+* To implement agile sprints.
+
+### Instructions to Run application
+
+TODO(ryan, max)!!!
+
+### Ideas not completed
+* Comparing Repos to other Repos
+* Average Cycle Time
