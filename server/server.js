@@ -41,7 +41,6 @@ async function uploadSize(repo, api) {
 };
 
 app.get("/api", async (req, res) => {
-    console.log('here')
     var data, success = await uploadSize(req.body.repo_name, req.body.api_key);
     if (success) {
         console.log(data)
@@ -54,5 +53,5 @@ app.get("/api", async (req, res) => {
     }
 })
 
-app.listen(8008, () => { console.log("Server started on port 5000") })
+app.listen(5000, () => { console.log("Server started on port 5000") })
 
