@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/MaxCunningham19/SWENG-SWE-Metric-Calculator#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "flask": "^0.2.10"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
