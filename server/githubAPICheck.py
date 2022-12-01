@@ -61,7 +61,6 @@ def get_repo_data(repo_name: str, access_token: str) -> str | None:
             "total_commits_to_main": numberOfCommits,
             "total_branches": numberOfBranches,
         }
-
         rstats = repo.get_stats_contributors()
         contributors = list()
         contributorData = list()
@@ -200,8 +199,8 @@ def get_repo_data(repo_name: str, access_token: str) -> str | None:
         json_object = json.dumps(dictionary, indent=4)
 
         # DEBUG WRITE TO JSON FILE
-        with open("githubData.json", "w") as outfile:
-          outfile.write(json_object)
+        # with open("githubData.json", "w") as outfile:
+        #   outfile.write(json_object)
         ##print("Data Written to JSON")
         return json_object
 
