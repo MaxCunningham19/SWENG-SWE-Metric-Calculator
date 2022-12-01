@@ -13,9 +13,13 @@ app.use(bodyParser.json());
 async function uploadSize()
 {
       // Reading Python files
-      var dataToSend;
+      var repo = "MaxCunningham19/SWENG-SWE-Metric-Calculator";
+      var api = '' //token goes here
+      
+      // Reading Python files
       // spawn new child process to call the python script
-      const python = spawn('python', ['server.py']);
+      // passes repo and api as arguments to the call
+      const python = spawn('python', ['server.py', repo, api]);
 
      // collect data from script
      python.stdout.on('data', function (data) {
@@ -39,9 +43,11 @@ async function uploadSize()
 };
 
 app.get("/api", async (req, res) =>{
+    console.log('here')
     var data = await uploadSize();
+    console.log(data)
     res.json(JSON.parse(data));
 })
 
-app.listen(5000, () => { console.log("Server started on port 5000") })
+app.listen(8008, () => { console.log("Server started on port 5000") })
 
