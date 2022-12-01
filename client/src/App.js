@@ -4,7 +4,12 @@ function App() {
   const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
-    fetch("/api").then(
+    fetch('/api', {
+    method: 'GET',
+    headers: {
+        'Accept': 'application/json',
+    },
+    }).then(
     response => response.json()
   ).then(
     data => {
