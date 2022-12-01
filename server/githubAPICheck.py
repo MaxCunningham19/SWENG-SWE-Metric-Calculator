@@ -200,9 +200,9 @@ def get_repo_data(repo_name: str, access_token: str) -> str | None:
         json_object = json.dumps(dictionary, indent=4)
 
         # DEBUG WRITE TO JSON FILE
-        # with open("githubData.json", "w") as outfile:
-        #   outfile.write(json_object)
-        print("Data Written to JSON")
+        with open("githubData.json", "w") as outfile:
+          outfile.write(json_object)
+        ##print("Data Written to JSON")
         return json_object
 
     except Exception as e:

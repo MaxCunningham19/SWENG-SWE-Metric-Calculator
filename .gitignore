@@ -5,7 +5,8 @@ client/node_modules
 client/.pnp
 client.pnp.js
 server/node_modules
-
+server/githubData.json
+server/accessToken
 # testing
 client/coverage
 

@@ -29,7 +29,7 @@ async function uploadSize()
      // in close event we are sure that stream from child process is closed, use await to make sure the process is done before returning
      await new Promise((resolve) => {
      python.on('exit', (code) => {
-     console.log(`child process exited with code ${code}, ${dataToSend}`);
+     //console.log(`child process exited with code ${code}, ${dataToSend}`);
      resolve();
     })
      
@@ -40,7 +40,7 @@ async function uploadSize()
 
 app.get("/api", async (req, res) =>{
     var data = await uploadSize();
-    res.json(data);
+    res.json(JSON.parse(data));
 })
 
 app.listen(5000, () => { console.log("Server started on port 5000") })

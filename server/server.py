@@ -2,14 +2,19 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import sys
 import githubAPICheck as githubAPI
 import formatToReact as formatter
+
+
+
 # import cgi
 # import json
 
-
+text_file = open('.\\accessToken', 'r')
+api_key = text_file.read()
+text_file.close
 
 repo_name = 'MaxCunningham19/SWENG-SWE-Metric-Calculator'
-api_key = '' # ! MUST BE VALID PERSONAL ACCESS TOKEN, WILL NOT WORK OTHERWISE
-output_string = formatter.format_data(githubAPI.get_repo_data(repo_name,api_key))
+##api_key = '' # ! MUST BE VALID PERSONAL ACCESS TOKEN, WILL NOT WORK OTHERWISE
+output_string = githubAPI.get_repo_data(repo_name,api_key)
 
 print(output_string)
 sys.stdout.flush
