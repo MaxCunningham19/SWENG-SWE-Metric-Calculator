@@ -1,16 +1,16 @@
-#Create the base OS image
-FROM python:3
+# #Create the base OS image
+# FROM python:3
 
-WORKDIR /app
+# WORKDIR /app
 
-COPY ["package.json", "package-lock.json", "./"]
+# COPY ["package.json", "package-lock.json", "./"]
 
-#Update the OS ubuntu image
-RUN apt-get update 
-RUN pip3 install Pygithub
+# #Update the OS ubuntu image
+# RUN apt-get update 
+# RUN pip3 install Pygithub
 
 #Create another image layer on top of base to install requirements
-FROM node:alpine
+FROM nikolaik/python-nodejs:latest
 
 #Install the requirements
 WORKDIR /app
@@ -18,7 +18,9 @@ WORKDIR /app
 COPY ["package.json", "package-lock.json", "./"]
 
 RUN ls
+RUN npm cache clear --force
 RUN npm install --production
+RUN python3 -m pip install Pygithub
 
 COPY . .
 

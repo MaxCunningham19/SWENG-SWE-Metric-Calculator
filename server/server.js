@@ -14,28 +14,31 @@ async function uploadSize()
 {
       // Reading Python files
       var repo = "MaxCunningham19/SWENG-SWE-Metric-Calculator";
-      var api = '' //token goes here
+      var api = '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' //token goes here
       
       // Reading Python files
       // spawn new child process to call the python script
       // passes repo and api as arguments to the call
-      const python = spawn('python', ['server.py', repo, api]);
+        const python = spawn('python3', ['server.py', repo, api]);
+ 
 
-     // collect data from script
-     python.stdout.on('data', function (data) {
-      dataToSend = data.toString();
-     });
+        // collect data from script
+        python.stdout.on('data', function (data) {
+            dataToSend = data.toString();
+        });
 
-     python.stderr.on('data', data => {
-      console.error(`stderr: ${data}`);
-     });
+        python.stderr.on('data', data => {
+            console.error(`stderr: ${data}`);
+        }  );
 
-     // in close event we are sure that stream from child process is closed, use await to make sure the process is done before returning
-     await new Promise((resolve) => {
-     python.on('exit', (code) => {
-     //console.log(`child process exited with code ${code}, ${dataToSend}`);
-     resolve();
-    })
+    
+
+        // in close event we are sure that stream from child process is closed, use await to make sure the process is done before returning
+        await new Promise((resolve) => {
+        python.on('exit', (code) => {
+        //console.log(`child process exited with code ${code}, ${dataToSend}`);
+        resolve();
+        })
      
     }); 
     
