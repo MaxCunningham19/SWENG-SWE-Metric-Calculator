@@ -152,13 +152,34 @@ const contributor_data = [
     "few_lines_of_code_commits": 7
 }
 ]; 
+
+
 function App() {
 
   const [theme, setTheme] = useState('light')
+  function getData() {
+    // create a new XMLHttpRequest
+    var xhr = new XMLHttpRequest()
+
+    // get a callback when the server responds
+    xhr.addEventListener('load', () => {
+      // update the state of the component with the result here
+      console.log(xhr.responseText,xhr.response)
+    })
+    // open the request with the verb and the url
+    xhr.setRequestHeader('Content-Security-Policy','default-src')
+    xhr.setRequestHeader('Access-Control-Allow-Origin','*')
+    xhr.open('GET', 'http://localhost:8080')
+    // send the request
+    xhr.send(JSON.stringify({ example: 'data' }))
+  }
   const toggleTheme = () => {
     if (theme === 'light') {
+      console.log('dark')
+      getData()
       setTheme('dark')
     } else {
+      console.log('light')
       setTheme('light')
     }
   }
