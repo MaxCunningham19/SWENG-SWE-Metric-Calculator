@@ -53,5 +53,14 @@ app.get("/api", async (req, res) => {
     res.json(JSON.parse(data));
 })
 
+app.post("/api", async (req, res) => {
+    console.log(req,'here')
+    var data = await uploadSize(req.body.api, req.body.name);
+    console.log(data)
+    res.setHeader('Content-Type','application/json')
+    res.setHeader('Access-Control-Allow-Origin','*')
+    res.json(JSON.parse(data));
+})
+
 app.listen(8080, () => { console.log("Server started on port 8080") })
 

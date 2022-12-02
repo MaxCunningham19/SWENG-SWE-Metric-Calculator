@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './components/darkMode.css';
 import Graph from './components/totalCommitsGraph'
 import LinesGraph from './components/linesAddedGraph'
@@ -19,16 +19,16 @@ const data = [
     "total_commits_to_main": 61,
     "total_branches": 7,
     "contributors": [
-        "AAjayiB",
-        "okaforc",
-        "VictoriaFabijaniak",
-        "bairdr",
-        "MaxCunningham19",
-        "aislinggallagher",
-        "declanquinn00",
-        "francsir"
+      "AAjayiB",
+      "okaforc",
+      "VictoriaFabijaniak",
+      "bairdr",
+      "MaxCunningham19",
+      "aislinggallagher",
+      "declanquinn00",
+      "francsir"
     ]
-  }  
+  }
 ];
 const contributor_data = [
   {
@@ -45,8 +45,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 3,
     "few_lines_of_code": 16,
     "few_lines_of_code_commits": 2
-},
-{
+  },
+  {
     "user": "okaforc",
     "total_additions": 218,
     "total_deletions": -65,
@@ -60,8 +60,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 3,
     "few_lines_of_code": 0,
     "few_lines_of_code_commits": 0
-},
-{
+  },
+  {
     "user": "VictoriaFabijaniak",
     "total_additions": 2733,
     "total_deletions": -137,
@@ -75,8 +75,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 2,
     "few_lines_of_code": 16,
     "few_lines_of_code_commits": 1
-},
-{
+  },
+  {
     "user": "bairdr",
     "total_additions": 131,
     "total_deletions": -48,
@@ -90,8 +90,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 3,
     "few_lines_of_code": 3,
     "few_lines_of_code_commits": 1
-},
-{
+  },
+  {
     "user": "MaxCunningham19",
     "total_additions": 120829,
     "total_deletions": -36,
@@ -105,8 +105,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 3,
     "few_lines_of_code": 23,
     "few_lines_of_code_commits": 3
-},
-{
+  },
+  {
     "user": "aislinggallagher",
     "total_additions": 60960,
     "total_deletions": -37768,
@@ -120,8 +120,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 0,
     "few_lines_of_code": 9,
     "few_lines_of_code_commits": 2
-},
-{
+  },
+  {
     "user": "declanquinn00",
     "total_additions": 878,
     "total_deletions": -430,
@@ -135,8 +135,8 @@ const contributor_data = [
     "average_lines_of_code_commits": 8,
     "few_lines_of_code": 6,
     "few_lines_of_code_commits": 3
-},
-{
+  },
+  {
     "user": "francsir",
     "total_additions": 88178,
     "total_deletions": -20542,
@@ -150,30 +150,27 @@ const contributor_data = [
     "average_lines_of_code_commits": 7,
     "few_lines_of_code": 19,
     "few_lines_of_code_commits": 7
-}
-]; 
+  }
+];
 
 
 function App() {
 
   const [theme, setTheme] = useState('light')
-  function getData() {
-    // create a new XMLHttpRequest
-    var xhr = new XMLHttpRequest()
-
-    // get a callback when the server responds
-    xhr.addEventListener('load', () => {
-      // update the state of the component with the result here
-      console.log(xhr.responseText,xhr.response)
-    })
-    // open the request with the verb and the url
-    xhr.setRequestHeader('Content-Security-Policy','default-src')
-    xhr.setRequestHeader('Access-Control-Allow-Origin','*')
-    xhr.open('GET', 'http://localhost:8080')
-    // send the request
-    xhr.send(JSON.stringify({ example: 'data' }))
+  async function getData() {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: 'React POST Request Example' })
+    };
+    const response = await fetch('http://localhost:8080/api', requestOptions);
+    const data = await response.json();
+    console.log(data)
+    this.setState({ postId: data.id });
   }
+  // empty dependency array means this effect will only run once (like componentDidMount in classes)
   const toggleTheme = () => {
+    getData()
     if (theme === 'light') {
       console.log('dark')
       getData()
@@ -198,61 +195,61 @@ function App() {
   }, []) */}
   useEffect(() => {
     document.body.className = theme;
-    }, [theme]);
+  }, [theme]);
 
-    const Item = styled(Paper)(({ theme }) => ({
-      backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      ...theme.typography.body2,
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      color: theme.palette.text.secondary,
-    }));  
-    console.log(data[0].total_commits_to_main)
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+  console.log(data[0].total_commits_to_main)
   return (
     <>
-    
+
       <Box sx={{ width: 1 }}>
-      <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-      <Box gridColumn="span 12" mb={10}>
-        <Navbar data={contributor_data} toggleTheme={toggleTheme}/>
-        </Box>
-        <Box gridColumn="span 12">
-          <a href="https://github.com/MaxCunningham19/SWENG-SWE-Metric-Calculator">
-            <Box align="center"><img src={Image} alt="horse" /></Box>
-          </a>
-        </Box>  
-       <Box gridColumn="span 12">
-          <Box><Typography variant="h2" align="center">Welcome to the Github Repository Metric Dashboard</Typography></Box>
-       </Box>
-       <Box gridColumn="span 4">
-          <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-            <Typography variant="h5" align="center">Commits to Main:</Typography>
-            <Typography variant="h5" align="center">{data[0].total_commits_to_main}</Typography>
+        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+          <Box gridColumn="span 12" mb={10}>
+            <Navbar data={contributor_data} toggleTheme={toggleTheme} />
+          </Box>
+          <Box gridColumn="span 12">
+            <a href="https://github.com/MaxCunningham19/SWENG-SWE-Metric-Calculator">
+              <Box align="center"><img src={Image} alt="horse" /></Box>
+            </a>
+          </Box>
+          <Box gridColumn="span 12">
+            <Box><Typography variant="h2" align="center">Welcome to the Github Repository Metric Dashboard</Typography></Box>
+          </Box>
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Commits to Main:</Typography>
+              <Typography variant="h5" align="center">{data[0].total_commits_to_main}</Typography>
             </Box>
-       </Box>
-       <Box gridColumn="span 4">
-          <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-            <Typography variant="h5" align="center">Number of Branches:</Typography>
-            <Typography variant="h5" align="center">{data[0].total_branches}</Typography></Box>
-       </Box>
-       <Box gridColumn="span 4">
-          <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-          <Typography variant="h5" align="center">Number of Contributors:</Typography>
-            <Typography variant="h5" align="center">{data[0].contributors.length}</Typography></Box>
-       </Box>
-       <Box gridColumn="span 6">
-          <Graph data={contributor_data}/>
-       </Box>
-       <Box gridColumn="span 6">
-          <LinesGraph data={contributor_data}/>
+          </Box>
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Number of Branches:</Typography>
+              <Typography variant="h5" align="center">{data[0].total_branches}</Typography></Box>
+          </Box>
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Number of Contributors:</Typography>
+              <Typography variant="h5" align="center">{data[0].contributors.length}</Typography></Box>
+          </Box>
+          <Box gridColumn="span 6">
+            <Graph data={contributor_data} />
+          </Box>
+          <Box gridColumn="span 6">
+            <LinesGraph data={contributor_data} />
+          </Box>
+          <Box gridColumn="span 6">
+            <MergesGraph data={contributor_data} />
+          </Box>
+
         </Box>
-        <Box gridColumn="span 6">
-          <MergesGraph data={contributor_data}/>
-        </Box>
-        
       </Box>
-    </Box> 
-        </>
+    </>
 
   )
 }
