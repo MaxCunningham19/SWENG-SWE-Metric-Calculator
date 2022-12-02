@@ -22,27 +22,28 @@ function App() {
   const [token, setToken] = useState('');
   const [repo, setRepo] = useState('');
   const [isVerified, setVerified] = useState(false);
-
+  const [isCollected, setCollected] = useState(false);
 
 
   async function retrieveData(name, api) {
     const requestOptions = {
-      crossDomain:true,
+      crossDomain: true,
       method: 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
-    },
-      body: JSON.stringify({ name: name,api: api })
+      },
+      body: JSON.stringify({ name: name, api: api })
     };
     const response = await fetch('/api', requestOptions);
-    if (response.status === 200){
+    if (response.status === 200) {
       const d = await response.json();
       console.log(d);
       setBackendData(d);
       this.setState({ postId: data.id });
     }
+    setCollected(true)
   }
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   const toggleTheme = () => {
@@ -71,11 +72,10 @@ function App() {
     color: theme.palette.text.secondary,
   }));
 
-  if(isVerified)
-  {
-    retrieveData(repo,token)
-  return (
-    <>
+  if (isVerified) {
+    if (isCollected) {
+      return (
+        <>
           <Box sx={{ width: 1 }}>
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
               <Box gridColumn="span 12" mb={10}>
@@ -117,13 +117,16 @@ function App() {
 
             </Box>
           </Box>
-          </>
-        )
-        }
+        </>
+      )
+    }
+    retrieveData(repo,token)
+    return <>Loading</>
+  }
   return (
-    <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken} isVerified={isVerified} 
-    setVerified={setVerified}/>
+    <DialogBox repo={repo} setRepo={setRepo} token={token} setToken={setToken} isVerified={isVerified}
+      setVerified={setVerified} />
   )
-          }
+}
 
 export default App;

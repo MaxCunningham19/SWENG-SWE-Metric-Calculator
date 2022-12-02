@@ -47,8 +47,10 @@ async function uploadSize(api, repo) {
 app.get("/api", async (req, res) => {
     var data = await uploadSize(req.body.api, req.body.name);
     console.log(data)
-    if (data==="ERROR"){
+    if (data=="ERROR"){
         res.sendStatus(404)
+        res.setHeader('Content-Type','application/json')
+        res.setHeader('Access-Control-Allow-Origin','*')
     }else{
         res.setHeader('Content-Type','application/json')
         res.setHeader('Access-Control-Allow-Origin','*')
