@@ -4,6 +4,7 @@ import Graph from './components/totalCommitsGraph'
 import LinesGraph from './components/linesAddedGraph'
 import DeletedGraph from './components/linesDeletedGraph'
 import MergesGraph from './components/AvgLinesGraph'
+import DialogBox from './components/DialogBox'
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper';
@@ -18,6 +19,8 @@ function App() {
 
   const [theme, setTheme] = useState('light')
   const [data, setBackendData] = useState([])
+  const [token, setToken] = useState('');
+  const [repo, setRepo] = useState('');
   async function getData() {
     const requestOptions = {
       crossDomain:true,
@@ -27,7 +30,7 @@ function App() {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     },
-      body: JSON.stringify({ name:'MaxCunningham19/SWENG-SWE-Metric-Calculator',api: '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' })
+      body: JSON.stringify({ name:'Utkarsh803/Heartbeat_Detection',api: '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' })
     };
     const response = await fetch('/api', requestOptions);
     const d = await response.json();
@@ -46,9 +49,9 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     document.body.className = theme;
@@ -64,7 +67,7 @@ function App() {
   return (
     <>
       {(typeof data.contributor_data == 'undefined') ? (
-        <p>Loading...</p>
+        <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken}/>
       ) :
         (
           <Box sx={{ width: 1 }}>
