@@ -1,18 +1,50 @@
 import * as React from 'react';
 import { styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
+import {useEffect, useState} from 'react'
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 import Switch from '@mui/material/Switch';
 import Typography from '@mui/material/Typography';
-const pages = ['Home', 'Metrics'];
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+const pages = ['Home'];
+
+
+const btn = ['Search By Repo'];
 
 function Navbar({data, toggleTheme}) {
+  const [open, setOpen] = React.useState(true);
+
+  const [token, setToken] = useState('');
+  const [repo, setRepo] = useState('');
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleRepoChange = event => {
+    setRepo(event.target.repo);
+    console.log('repo is:', event.target.repo);
+  }
+
+    const handleTokenChange = event => {
+      setToken(event.target.token);
+      console.log('token is:', event.target.token);
+    }
   const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -62,6 +94,41 @@ function Navbar({data, toggleTheme}) {
 
 
   return (
+    <div>
+    <Dialog open={open} onClose={handleClose}>
+      <DialogTitle>Welcome</DialogTitle>
+      <DialogContent>
+        <DialogContentText>
+          Enter a GitHub Repo and Personal Access Token
+        </DialogContentText>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="GitHub Repository Name"
+          type="name"
+          fullWidth
+          variant="standard"
+          onChange={handleRepoChange}
+          repo={repo}
+        />
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Personal Access Token"
+          type="name"
+          fullWidth
+          variant="standard"
+          onChange={handleTokenChange}
+          token={token}
+        />
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>Ok</Button>
+      </DialogActions>
+    </Dialog>
     <AppBar style={{ background: '#6e5494', border: 1}} position="absolute">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -74,6 +141,12 @@ function Navbar({data, toggleTheme}) {
                 {page}
               </Button>
             ))}
+            <Button
+              sx={{ my: 2, color: 'white', display: 'block' }}
+              onClick={handleOpen}
+              >
+              {btn}
+              </Button>
           </Box>
           <StyledAutocomplete
             // sx={{ width: 250,
@@ -122,6 +195,7 @@ function Navbar({data, toggleTheme}) {
         </Toolbar>
       </Container>
     </AppBar>
+    </div>
   );
 }
 export default Navbar;
