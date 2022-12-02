@@ -166,7 +166,7 @@ function App() {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     },
-      body: JSON.stringify({ title: 'React POST Request Example' })
+      body: JSON.stringify({ name:'MaxCunningham19/SWENG-SWE-Metric-Calculator',api: '' })
     };
     const response = await fetch('/api', requestOptions);
     const data = await response.json();
