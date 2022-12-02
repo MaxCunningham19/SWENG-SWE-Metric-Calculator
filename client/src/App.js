@@ -25,7 +25,7 @@ function App() {
 
 
 
-  async function getData(name, api) {
+  async function retrieveData(name, api) {
     const requestOptions = {
       crossDomain:true,
       method: 'POST',
@@ -73,6 +73,7 @@ function App() {
 
   if(isVerified)
   {
+    retrieveData(repo,token)
   return (
     <>
           <Box sx={{ width: 1 }}>

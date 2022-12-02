@@ -21,8 +21,12 @@ import DialogTitle from '@mui/material/DialogTitle';
 function DialogBox({token, setToken,repo, setRepo, isVerified, setVerified}) {
   const [open, setOpen] = React.useState(true);
 
-  const [tmp_token, setTmpToken] = useState('');
-  const [tmp_repo, setTmpRepo] = useState('');
+  const [tmp_token, setTmpToken] = React.useState('');
+  const [tmp_repo, setTmpRepo] = React.useState('');
+  const [name, setName] = React.useState('Cat in the Hat');
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
 
   const handleCancel = () => {
     setOpen(false);
@@ -35,15 +39,13 @@ function DialogBox({token, setToken,repo, setRepo, isVerified, setVerified}) {
     setVerified(true);
   };
 
-  const handleRepoChange = event => {
-    setTmpRepo(tmp_repo + event.nativeEvent.data);
-    console.log('repo is:', tmp_repo);
-  }
+  const handleRepoChange = (event) => {
+    setTmpRepo(event.target.value);
+  };
 
-  const handleTokenChange = event => {
-    setTmpToken(tmp_token + event.nativeEvent.data);
-    console.log('token is:', tmp_token);
-  }
+  const handleTokenChange = (event) => {
+    setTmpToken(event.target.value);
+  };
   return (
     <div>
       <Dialog open={open} onClose={handleCancel}>
