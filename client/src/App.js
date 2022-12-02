@@ -73,6 +73,7 @@ function App() {
 
   if(isVerified)
   {
+    getData(repo,token)
   return (
     <>
           <Box sx={{ width: 1 }}>

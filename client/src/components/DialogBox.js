@@ -33,6 +33,8 @@ function DialogBox({token, setToken,repo, setRepo, isVerified, setVerified}) {
     setRepo(tmp_repo)
     setOpen(false);
     setVerified(true);
+    handleRepoChange();
+    handleTokenChange();
   };
 
   const handleRepoChange = event => {
@@ -57,22 +59,18 @@ function DialogBox({token, setToken,repo, setRepo, isVerified, setVerified}) {
             margin="dense"
             id="name"
             label="GitHub Repository Name"
-            type="name"
+            type="email"
             fullWidth
             variant="standard"
-            onChange={handleRepoChange}
-            value={tmp_repo}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Personal Access Token"
-            type="name"
+            type="email"
             fullWidth
             variant="standard"
-            onChange={handleTokenChange}
-            value={tmp_token}
           />
         </DialogContent>
         <DialogActions>
