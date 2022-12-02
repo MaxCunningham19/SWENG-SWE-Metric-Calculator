@@ -36,5 +36,7 @@ The brief for the assignment is as follows:
 
 ### Ideas not completed
 
+* We implemented a scoring system but did not have enough time to showcase it in the frontend
+* We have a navbar created but had to remove it due to it causing a last minute integration bug
 * Comparing Repos to other Repos
 * Average Cycle Time
