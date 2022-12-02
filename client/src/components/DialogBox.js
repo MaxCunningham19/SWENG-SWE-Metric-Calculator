@@ -18,7 +18,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-function DialogBox({token, setToken,repo, setRepo}) {
+function DialogBox({token, setToken,repo, setRepo, isVerified, setVerified}) {
   const [open, setOpen] = React.useState(true);
 
   const [tmp_token, setTmpToken] = useState('');
@@ -32,6 +32,7 @@ function DialogBox({token, setToken,repo, setRepo}) {
     setToken(tmp_token);
     setRepo(tmp_repo)
     setOpen(false);
+    setVerified(true);
   };
 
   const handleRepoChange = event => {

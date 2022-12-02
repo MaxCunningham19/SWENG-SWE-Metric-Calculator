@@ -21,6 +21,7 @@ function App() {
   const [data, setBackendData] = useState([])
   const [token, setToken] = useState('');
   const [repo, setRepo] = useState('');
+  const [isVerified, setVerified] = useState(false);
   async function getData() {
     const requestOptions = {
       crossDomain:true,
@@ -64,12 +65,11 @@ function App() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
+
+  if(isVerified)
+  {
   return (
     <>
-      {(typeof data.contributor_data == 'undefined') ? (
-        <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken}/>
-      ) :
-        (
           <Box sx={{ width: 1 }}>
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
               <Box gridColumn="span 12" mb={10}>
@@ -111,11 +111,12 @@ function App() {
 
             </Box>
           </Box>
-        )}
-    </>
-
-
+          </>
+  )}
+  return (
+    <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken} isVerified={isVerified} 
+    setVerified={setVerified}/>
   )
-}
+          }
 
-export default App
+export default App;
