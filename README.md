@@ -15,8 +15,26 @@ The brief for the assignment is as follows:
 
 ### Instructions to Run application
 
-TODO(ryan, max)!!!
+#### Prerequisite
+
+* You need Docker Installed if it is not vist this link: https://docs.docker.com/get-docker/
+* A computer
+* ports 3000 and 8080
+
+#### Steps to run
+
+1. Download this Repository
+2. Unzip the Folder
+3. Enter the unzipped folder
+4. Here you should see a docker-compose-file, this README and a gitignore file
+5. Then type in the following command
+6. docker-compose up -d
+7. This will build the docker images for the front and back end and start them
+8. Then go onto a internet Browser of your choice and type in the following web address http://localhost:3000
+9. Enter a github repo you wish to view and an appropriate api key 
+10. For instructions on api keys vist this linke : https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
 ### Ideas not completed
+
 * Comparing Repos to other Repos
 * Average Cycle Time
