@@ -12,6 +12,7 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid';
 import Pie from './components/PieChart'
 import Navbar from './components/Navbar';
+import Loading from './components/Loading';
 import { Typography } from '@mui/material';
 import Image from './api/contributors.png'
 
@@ -40,8 +41,9 @@ function App() {
     if (response.status === 200) {
       const d = await response.json();
       console.log(d);
-      setBackendData(d);
-      this.setState({ postId: data.id });
+      setCollected(true)
+      return d
+      //this.setState({ postId: data.id });
     }
     setCollected(true)
   }
@@ -56,9 +58,9 @@ function App() {
     }
   }
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    if (isVerified){retrieveData(repo,token);}
+  });
 
   useEffect(() => {
     document.body.className = theme;
@@ -120,8 +122,7 @@ function App() {
         </>
       )
     }
-    retrieveData(repo,token)
-    return <>Loading</>
+    return <><Loading repo={repo} token={token} retrieveData={retrieveData} setData={setBackendData}  /></>
   }
   return (
     <DialogBox repo={repo} setRepo={setRepo} token={token} setToken={setToken} isVerified={isVerified}
