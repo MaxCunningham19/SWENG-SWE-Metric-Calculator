@@ -21,23 +21,27 @@ import DialogTitle from '@mui/material/DialogTitle';
 function DialogBox({token, setToken,repo, setRepo}) {
   const [open, setOpen] = React.useState(true);
 
+  const [tmp_token, setTmpToken] = useState('');
+  const [tmp_repo, setTmpRepo] = useState('');
+
   const handleCancel = () => {
     setOpen(false);
   };
 
   const handleOk = () => {
+    setToken(tmp_token);
+    setRepo(tmp_repo)
     setOpen(false);
   };
 
   const handleRepoChange = event => {
-    setRepo(event.target.value);
-    console.log('repo is:', event.value);
+    setTmpRepo(tmp_repo + event.nativeEvent.data);
+    console.log('repo is:', tmp_repo);
   }
 
   const handleTokenChange = event => {
-    
-    setToken(event.target.value);
-    console.log('token is:', event.value);
+    setTmpToken(tmp_token + event.nativeEvent.data);
+    console.log('token is:', tmp_token);
   }
   return (
     <div>
@@ -56,7 +60,7 @@ function DialogBox({token, setToken,repo, setRepo}) {
             fullWidth
             variant="standard"
             onChange={handleRepoChange}
-            value={repo}
+            value={tmp_repo}
           />
           <TextField
             autoFocus
@@ -67,7 +71,7 @@ function DialogBox({token, setToken,repo, setRepo}) {
             fullWidth
             variant="standard"
             onChange={handleTokenChange}
-            value={token}
+            value={tmp_token}
           />
         </DialogContent>
         <DialogActions>
