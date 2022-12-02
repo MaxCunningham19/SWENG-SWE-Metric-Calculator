@@ -1,15 +1,5 @@
 import * as React from 'react';
-import { styled, alpha, createTheme, ThemeProvider } from '@mui/material/styles';
-import { useEffect, useState } from 'react'
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Container from '@mui/material/Container';
-import InputBase from '@mui/material/InputBase';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import Switch from '@mui/material/Switch';
-import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -18,31 +8,45 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
 
-function DialogBox({token, setToken,repo, setRepo}) {
+function DialogBox({setVerified, setBackendData}) {
   const [open, setOpen] = React.useState(true);
 
-  const [tmp_token, setTmpToken] = useState('');
-  const [tmp_repo, setTmpRepo] = useState('');
+  const [tmp_token, setTmpToken] = React.useState('');
+  const [tmp_repo, setTmpRepo] = React.useState('');
 
   const handleCancel = () => {
     setOpen(false);
   };
 
   const handleOk = () => {
-    setToken(tmp_token);
-    setRepo(tmp_repo)
     setOpen(false);
+    getD()
   };
 
-  const handleRepoChange = event => {
-    setTmpRepo(tmp_repo + event.nativeEvent.data);
-    console.log('repo is:', tmp_repo);
+  async function getD(){
+    const requestOptions = {
+        crossDomain:true,
+        method: 'POST',
+        headers: { 
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Credentials': 'true'
+      },
+        body: JSON.stringify({ name:tmp_repo,api: tmp_token })
+      };
+      const response = await fetch('/api', requestOptions);
+      const d = await response.json();
+      console.log(d);
+      setBackendData(d);
   }
 
-  const handleTokenChange = event => {
-    setTmpToken(tmp_token + event.nativeEvent.data);
-    console.log('token is:', tmp_token);
-  }
+  const handleRepoChange = (event) => {
+    setTmpRepo(event.target.value);
+  };
+
+  const handleTokenChange = (event) => {
+    setTmpToken(event.target.value);
+  };
   return (
     <div>
       <Dialog open={open} onClose={handleCancel}>
@@ -56,22 +60,22 @@ function DialogBox({token, setToken,repo, setRepo}) {
             margin="dense"
             id="name"
             label="GitHub Repository Name"
-            type="name"
-            fullWidth
-            variant="standard"
-            onChange={handleRepoChange}
-            value={tmp_repo}
+            ype="name"
+             fullWidth
+             variant="standard"
+             onChange={handleRepoChange}
+             value={tmp_repo}
           />
           <TextField
             autoFocus
             margin="dense"
             id="name"
             label="Personal Access Token"
-            type="name"
-            fullWidth
-            variant="standard"
-            onChange={handleTokenChange}
-            value={tmp_token}
+            ype="name"
+             fullWidth
+             variant="standard"
+             onChange={handleTokenChange}
+             value={tmp_token}
           />
         </DialogContent>
         <DialogActions>

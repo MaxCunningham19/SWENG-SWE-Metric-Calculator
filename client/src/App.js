@@ -18,26 +18,9 @@ import Image from './api/contributors.png'
 function App() {
 
   const [theme, setTheme] = useState('light')
-  const [data, setBackendData] = useState([])
-  const [token, setToken] = useState('');
-  const [repo, setRepo] = useState('');
-  async function getData() {
-    const requestOptions = {
-      crossDomain:true,
-      method: 'POST',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Credentials': 'true'
-    },
-      body: JSON.stringify({ name:'Utkarsh803/Heartbeat_Detection',api: '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' })
-    };
-    const response = await fetch('/api', requestOptions);
-    const d = await response.json();
-    console.log(d);
-    setBackendData(d);
-    this.setState({ postId: data.id });
-  }
+  const [data, setBackendData] = useState(undefined)
+  const [verified, setVerified] = useState(false)
+
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   const toggleTheme = () => {
     if (theme === 'light') {
@@ -64,58 +47,55 @@ function App() {
     textAlign: 'center',
     color: theme.palette.text.secondary,
   }));
-  return (
-    <>
-      {(typeof data.contributor_data == 'undefined') ? (
-        <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken}/>
-      ) :
-        (
-          <Box sx={{ width: 1 }}>
-            <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
-              <Box gridColumn="span 12" mb={10}>
-                <Navbar data={data.contributor_data} toggleTheme={toggleTheme} />
-              </Box>
-              <Box gridColumn="span 12">
-                <a href="https://github.com/MaxCunningham19/SWENG-SWE-Metric-Calculator">
-                  <Box align="center"><img src={Image} alt="horse" /></Box>
-                </a>
-              </Box>
-              <Box gridColumn="span 12">
-                <Box><Typography variant="h2" align="center">Welcome to the Github Repository Metric Dashboard</Typography></Box>
-              </Box>
-              <Box gridColumn="span 4">
-                <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-                  <Typography variant="h5" align="center">Commits to Main:</Typography>
-                  <Typography variant="h5" align="center">{data.total_commits_to_main}</Typography>
-                </Box>
-              </Box>
-              <Box gridColumn="span 4">
-                <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-                  <Typography variant="h5" align="center">Number of Branches:</Typography>
-                  <Typography variant="h5" align="center">{data.total_branches}</Typography></Box>
-              </Box>
-              <Box gridColumn="span 4">
-                <Box sx={{ border: 5, borderColor: 'grey.500' }}>
-                  <Typography variant="h5" align="center">Number of Contributors:</Typography>
-                  <Typography variant="h5" align="center">{data.contributors.length}</Typography></Box>
-              </Box>
-              <Box gridColumn="span 6">
-                <Graph data={data.contributor_data} />
-              </Box>
-              <Box gridColumn="span 6">
-                <LinesGraph data={data.contributor_data} />
-              </Box>
-              <Box gridColumn="span 6">
-                <MergesGraph data={data.contributor_data} />
-              </Box>
 
+  if (data == undefined) {
+    return <DialogBox setVerified={setVerified} setBackendData={setBackendData} />
+  }
+
+    return (
+    <>
+      <Box sx={{ width: 1 }}>
+        <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
+          <Box gridColumn="span 12" mb={10}>
+          </Box>
+          <Box gridColumn="span 12">
+            <a href="https://github.com/MaxCunningham19/SWENG-SWE-Metric-Calculator">
+              <Box align="center"><img src={Image} alt="horse" /></Box>
+            </a>
+          </Box>
+          <Box gridColumn="span 12">
+            <Box><Typography variant="h2" align="center">Welcome to the Github Repository Metric Dashboard</Typography></Box>
+          </Box>
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Commits to Main:</Typography>
+              <Typography variant="h5" align="center">{data.total_commits_to_main}</Typography>
             </Box>
           </Box>
-        )}
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Number of Branches:</Typography>
+              <Typography variant="h5" align="center">{data.total_branches}</Typography></Box>
+          </Box>
+          <Box gridColumn="span 4">
+            <Box sx={{ border: 5, borderColor: 'grey.500' }}>
+              <Typography variant="h5" align="center">Number of Contributors:</Typography>
+              <Typography variant="h5" align="center">{data.contributors.length}</Typography></Box>
+          </Box>
+          <Box gridColumn="span 6">
+            <Graph data={data.contributor_data} />
+          </Box>
+          <Box gridColumn="span 6">
+            <LinesGraph data={data.contributor_data} />
+          </Box>
+          <Box gridColumn="span 6">
+            <MergesGraph data={data.contributor_data} />
+          </Box>
+
+        </Box>
+      </Box>
     </>
-
-
-  )
+    )
 }
 
 export default App
