@@ -159,11 +159,16 @@ function App() {
   const [theme, setTheme] = useState('light')
   async function getData() {
     const requestOptions = {
+      crossDomain:true,
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true'
+    },
       body: JSON.stringify({ title: 'React POST Request Example' })
     };
-    const response = await fetch('http://localhost:8080/api', requestOptions);
+    const response = await fetch('/api', requestOptions);
     const data = await response.json();
     console.log(data)
     this.setState({ postId: data.id });
