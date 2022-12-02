@@ -9,6 +9,7 @@ function MergesGraph({data}) {
     //setGraphData(data);
     //setLoading(false);
     return (
+      <ResponsiveContainer width="100%" height={400}>
               <BarChart
                 width={2000}
                 height={800}
@@ -21,12 +22,13 @@ function MergesGraph({data}) {
                 }}
               >
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="username" />
-                <YAxis dataKey="merges"/>
+                <XAxis dataKey="user" />
+                <YAxis dataKey="average_lines_of_code"/>
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="merges" fill="#db5a6b" />
+                <Bar dataKey="average_lines_of_code" fill="#65C9AE" />
               </BarChart>
+              </ResponsiveContainer>
     )
   }
   

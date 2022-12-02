@@ -49,5 +49,5 @@ app.get("/api", async (req, res) =>{
     res.json(JSON.parse(data));
 })
 
-app.listen(8008, () => { console.log("Server started on port 5000") })
+app.listen(8080, () => { console.log("Server started on port 8080") })
 

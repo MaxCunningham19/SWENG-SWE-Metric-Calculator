@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 const pages = ['Home', 'Metrics'];
 
 function Navbar({data, toggleTheme}) {
-  console.log(toggleTheme)
   const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -98,7 +97,7 @@ function Navbar({data, toggleTheme}) {
             // }}
             options={data}
             autoHighlight
-            getOptionLabel={(option) => option.username}
+            getOptionLabel={(option) => option.user}
             renderOption={(props, option) => (
             <Box component="li" sx={{ mr: 2, flexShrink: 0, bgcolor: '#e8dff5' }} {...props}>
              {option.username}

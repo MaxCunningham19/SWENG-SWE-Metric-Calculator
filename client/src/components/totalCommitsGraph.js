@@ -9,6 +9,7 @@ function TotalCommitsGraph({data}) {
     //setGraphData(data);
     //setLoading(false);
     return (
+      <ResponsiveContainer width="100%" height={400}>
         <BarChart
         width={2000}
         height={800}
@@ -21,12 +22,13 @@ function TotalCommitsGraph({data}) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="username" />
-        <YAxis dataKey="commits"/>
+        <XAxis dataKey="user" />
+        <YAxis dataKey="total_commits"/>
         <Tooltip />
         <Legend />
-        <Bar dataKey="commits" fill="#db5a6b" />
+        <Bar dataKey="total_commits" fill="#5C83CA" />
       </BarChart>
+      </ResponsiveContainer>
     )
   }
   
