@@ -10,6 +10,6 @@ RUN npm install
 RUN npm install recharts
 RUN npm install --save recharts --legacy-peer-deps
 
-
-CMD ["npm", "run", "start"]
 EXPOSE 3000
+CMD ["npm", "run", "start"]
+
