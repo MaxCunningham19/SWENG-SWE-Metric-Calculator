@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 async function uploadSize(api, repo) {
     // Reading Python files
     //   var repo = "MaxCunningham19/SWENG-SWE-Metric-Calculator";
-    //   var api = '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' //token goes here
+    //   var api = '' //token goes here
 
     // Reading Python files
     // spawn new child process to call the python script
