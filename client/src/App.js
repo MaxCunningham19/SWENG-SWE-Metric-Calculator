@@ -21,7 +21,10 @@ function App() {
   const [data, setBackendData] = useState([])
   const [token, setToken] = useState('');
   const [repo, setRepo] = useState('');
-  async function getData() {
+
+
+
+  async function getData(name, api) {
     const requestOptions = {
       crossDomain:true,
       method: 'POST',
@@ -30,7 +33,7 @@ function App() {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     },
-      body: JSON.stringify({ name:'Utkarsh803/Heartbeat_Detection',api: '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' })
+      body: JSON.stringify({ name: name,api: api })
     };
     const response = await fetch('/api', requestOptions);
     const d = await response.json();
@@ -66,9 +69,17 @@ function App() {
   }));
   return (
     <>
-      {(typeof data.contributor_data == 'undefined') ? (
-        <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken}/>
+      {(typeof repo =='undefined' && token == 'undefined') ? (
+        <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken}/> ///here
+
       ) :
+          ///some nested conditonal thing 
+          //typeof data.contributor_data == 'undefined'
+          //{getData(repo, token);}
+          //<p1>display loading screen</p1>
+        
+
+        //if all conditions are true display this screen
         (
           <Box sx={{ width: 1 }}>
             <Box display="grid" gridTemplateColumns="repeat(12, 1fr)" gap={2}>
