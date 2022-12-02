@@ -1,7 +1,3 @@
-//const express = require('express')
-//const app = express()
-//
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const {spawn} = require('child_process');
@@ -13,13 +9,9 @@ app.use(bodyParser.json());
 async function uploadSize()
 {
       // Reading Python files
-      var repo = "MaxCunningham19/SWENG-SWE-Metric-Calculator";
-      var api = '' //token goes here
-      
-      // Reading Python files
+      var dataToSend;
       // spawn new child process to call the python script
-      // passes repo and api as arguments to the call
-      const python = spawn('python', ['server.py', repo, api]);
+      const python = spawn('python', ['server.py']);
 
      // collect data from script
      python.stdout.on('data', function (data) {
@@ -43,9 +35,7 @@ async function uploadSize()
 };
 
 app.get("/api", async (req, res) =>{
-    console.log('here')
     var data = await uploadSize();
-    console.log(data)
     res.json(JSON.parse(data));
 })
 
