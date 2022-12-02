@@ -205,8 +205,6 @@ def get_repo_data(repo_name: str, access_token: str) -> str | None:
         return json_object
 
     except Exception as e:
-        print(e)
-        print("\nError Writing to JSON")
         return None
 
 

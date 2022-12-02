@@ -22,7 +22,10 @@ function App() {
   const [token, setToken] = useState('');
   const [repo, setRepo] = useState('');
   const [isVerified, setVerified] = useState(false);
-  async function getData() {
+
+
+
+  async function getData(name, api) {
     const requestOptions = {
       crossDomain:true,
       method: 'POST',
@@ -31,13 +34,15 @@ function App() {
         'Access-Control-Allow-Origin': '*',
         'Access-Control-Allow-Credentials': 'true'
     },
-      body: JSON.stringify({ name:'Utkarsh803/Heartbeat_Detection',api: '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' })
+      body: JSON.stringify({ name: name,api: api })
     };
     const response = await fetch('/api', requestOptions);
-    const d = await response.json();
-    console.log(d);
-    setBackendData(d);
-    this.setState({ postId: data.id });
+    if (response.status === 200){
+      const d = await response.json();
+      console.log(d);
+      setBackendData(d);
+      this.setState({ postId: data.id });
+    }
   }
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   const toggleTheme = () => {
@@ -112,7 +117,8 @@ function App() {
             </Box>
           </Box>
           </>
-  )}
+        )
+        }
   return (
     <DialogBox repo={repo} setRepo = {setRepo} token={token} setToken={setToken} isVerified={isVerified} 
     setVerified={setVerified}/>
