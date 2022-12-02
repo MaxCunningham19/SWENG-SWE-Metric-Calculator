@@ -173,7 +173,7 @@ function Navbar({data, toggleTheme}) {
             getOptionLabel={(option) => option.user}
             renderOption={(props, option) => (
             <Box component="li" sx={{ mr: 2, flexShrink: 0, bgcolor: '#e8dff5' }} {...props}>
-             {option.username}
+             {option.user}
             </Box>
             )}
             renderInput={(params) => (
