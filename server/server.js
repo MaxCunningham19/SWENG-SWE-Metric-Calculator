@@ -45,21 +45,27 @@ async function uploadSize(api, repo) {
 };
 
 app.get("/api", async (req, res) => {
-    console.log(req,'here')
     var data = await uploadSize(req.body.api, req.body.name);
     console.log(data)
-    res.setHeader('Content-Type','application/json')
-    res.setHeader('Access-Control-Allow-Origin','*')
-    res.json(JSON.parse(data));
+    if (data==="ERROR"){
+        res.sendStatus(404)
+    }else{
+        res.setHeader('Content-Type','application/json')
+        res.setHeader('Access-Control-Allow-Origin','*')
+        res.json(JSON.parse(data));
+    }
 })
 
 app.post("/api", async (req, res) => {
-    console.log(req,'here')
     var data = await uploadSize(req.body.api, req.body.name);
     console.log(data)
-    res.setHeader('Content-Type','application/json')
-    res.setHeader('Access-Control-Allow-Origin','*')
-    res.json(JSON.parse(data));
+    if (data==="ERROR"){
+        res.sendStatus(404)
+    }else{
+        res.setHeader('Content-Type','application/json')
+        res.setHeader('Access-Control-Allow-Origin','*')
+        res.json(JSON.parse(data));
+    }
 })
 
 app.listen(8080, () => { console.log("Server started on port 8080") })

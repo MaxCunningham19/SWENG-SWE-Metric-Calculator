@@ -33,10 +33,12 @@ function App() {
       body: JSON.stringify({ name:'Utkarsh803/Heartbeat_Detection',api: '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' })
     };
     const response = await fetch('/api', requestOptions);
-    const d = await response.json();
-    console.log(d);
-    setBackendData(d);
-    this.setState({ postId: data.id });
+    if (response.status === 200){
+      const d = await response.json();
+      console.log(d);
+      setBackendData(d);
+      this.setState({ postId: data.id });
+    }
   }
   // empty dependency array means this effect will only run once (like componentDidMount in classes)
   const toggleTheme = () => {
